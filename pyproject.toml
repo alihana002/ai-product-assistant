@@ -1,10 +1,10 @@
 [project]
 name = "ai-product-assistant"
 version = "0.1.0"
-description = "Add your description here"
+description = "Product Assistant powered by AI"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [Product Assistant powered by AI]
+dependencies = []
 
 [project.scripts]
 ai-product-assistant = "ai_product_assistant:main"
