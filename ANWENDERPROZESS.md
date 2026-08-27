@@ -107,7 +107,7 @@ verständliche Ausgabe
 -   [x] `get_product()` aufrufen
 -   [x] Prüfen, ob ein Produkt gefunden wurde
 -   [x] Produkt verständlich anzeigen
--   [] Bei unbekannter ID Fehlermeldung anzeigen
+-   [x] Bei unbekannter ID Fehlermeldung anzeigen
 
 # Version 2 -- Produktmenü
 
