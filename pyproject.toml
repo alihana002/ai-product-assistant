@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Product Assistant powered by AI"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "jupyter>=1.1.1",
+]
 
 [project.scripts]
 ai-product-assistant = "ai_product_assistant:main"
