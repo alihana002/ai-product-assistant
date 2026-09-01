@@ -1,4 +1,14 @@
+import json
+from json.decoder import JSONDecodeError
+import ijson
+
 def main() -> None:
+    """
+    products = load_products()
+    print(products)
+    
+    """
+
     """
     while True:
         try:
@@ -15,8 +25,10 @@ def main() -> None:
             print(f"Preis: {product["price"]}")
             break
     
+
+    
     product_list = list_products(products)
-    print(f"Die Produkte sind vorhanden: {product_list}")
+    print(f"Die Produkte sind in der Json vorhanden: {product_list}")
 
     product_name = (input("Welches Produkt? "))
    
@@ -50,12 +62,25 @@ def main() -> None:
          except ValueError:
             print("Es wird eine Zahl erwartet")
             continue
+    while True:
+             try:
+                price = int(input("Youre Stock: "))
+             except ValueError:
+                print("Integer is expected: ")
+                continue
+         new_product = add_product(product_id, name, price, stock)
+         save_in_json = save_products(products)
+         print(f"whole object in json:  {save_in_json}")
 
-         new_product = add_product(product_id, name, price)
-         print(new_product)
+         print(f"Neues Produkt: {new_product}")
          break
-   
-
+        break 
+    
+         
+        
+    
+  
+    
     while True:
                 try:
                     input_product_id = int(input("Enter a productid for updating stock: "))
@@ -85,12 +110,13 @@ def main() -> None:
                
                     
                 break
+    
     """
-    low_stock_list = get_low_stocks(products)
-    print(low_stock_list)
+    load_stock_list = get_low_stocks()
+    print(load_stock_list)
     
 
-
+    
     
 
 products = [
@@ -102,7 +128,8 @@ products = [
 
 
 def get_product(product_id: int) -> list[dict[str, int | str]]:
-    for product in products:
+    saved_products = load_products()
+    for product in saved_products:
         if product["id"] == product_id:
             return product
 
@@ -110,27 +137,30 @@ def get_product(product_id: int) -> list[dict[str, int | str]]:
 
 
 def list_products(products: list[dict[str, int | str]]) -> list[str]:
+    saved_list = load_products()
     result = []
 
-    for product in products:
+    for product in saved_list:
         result.append(product["name"])
 
     return result
         
     
 def search_product(product_name):
-    for product in products:
+    saved_list = load_products()
+    for product in saved_list:
         if product["name"].lower() == product_name.lower():
             return product
     return None
 
 
-def add_product(id: int, name: str, price: int):
+def add_product(id: int, name: str, price: int, stock: int):
 
     new_product = {
         "id": id,
         "name": name,
-        "price": price 
+        "price": price,
+        "stock": stock
     }
 
     products.append(new_product)
@@ -145,12 +175,31 @@ def update_stock(product_id: id, update_stock: id):
     return None
 
 
-def get_low_stocks(products):
+def get_low_stocks():
+    load_list = load_products()
     low_stock_products = []
-    for product in products:
+    for product in load_list:
         if product["stock"]<= 2:
             low_stock_products.append(product)
     return low_stock_products
-     
 
+
+
+def save_products(products):
+    with open("data/products.json", "w", encoding="utf-8") as f:
+        json.dump(products, f, indent=4)
+        return products
+
+
+
+def load_products():
+    with open('data/products.json', 'r', encoding="utf-8") as f:
+        json_products = json.load(f)
+        return json_products
+
+
+  
+          
+
+    
      
