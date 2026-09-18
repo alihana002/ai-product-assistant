@@ -1,205 +1,204 @@
-import json
-from json.decoder import JSONDecodeError
-import ijson
+
+from .services import * 
+from .repository import * 
 
 def main() -> None:
-    """
+    
+
+
     products = load_products()
-    print(products)
-    
-    """
 
-    """
+
+
     while True:
-        try:
-            product_id = int(input("Welche id? "))
-        except ValueError:
-            print("Es wird eine Zahl erwartet")
-            continue
+
         
-        product = get_product(product_id)
-        if product is None:
-            print("Diese ID gibt es nicht")
-        else:
-            print(f"Name: {product["name"]}")
-            print(f"Preis: {product["price"]}")
-            break
-    
 
-    
-    product_list = list_products(products)
-    print(f"Die Produkte sind in der Json vorhanden: {product_list}")
+        print("\n--- Main Menu ---")
+        print("1. get product (by id)")
+        print("2. list products")
+        print("3. search product")
+        print("4. add product")
+        print("5. update stock")
+        print("6. get low stocks")
+        print("7. delete product")
+        print("8. Exit")
 
-    product_name = (input("Welches Produkt? "))
-   
-    found_product = search_product(product_name)
-    if found_product is None:
-        print("Dieser Produkt existiert nicht")
 
-    else:
-        print(f"Das folgende Produkt: {found_product["name"]}, {found_product["price"]}")
+        choice = int(input("Enter your choice (1-8): "))
 
-    
-    
-    name = input("Ein neues Produkt hinzufügen: ")
-    while True:
-        try:
-            product_id = int(input("Eine Id: "))
-        except ValueError:
-            print("Es wird eine Zahl erwartet")
-            continue
-       
 
-        existing_product = get_product(product_id)
-
-        if existing_product is not None:
-            print("die id existiert bereits")
-            continue
-        break    
-    while True:
-         try:
-            price = int(input("Einen Preis: "))
-         except ValueError:
-            print("Es wird eine Zahl erwartet")
-            continue
-    while True:
-             try:
-                price = int(input("Youre Stock: "))
-             except ValueError:
-                print("Integer is expected: ")
-                continue
-         new_product = add_product(product_id, name, price, stock)
-         save_in_json = save_products(products)
-         print(f"whole object in json:  {save_in_json}")
-
-         print(f"Neues Produkt: {new_product}")
-         break
-        break 
+        if choice == 8:
+            print("Exiting the program. Goodbye!")
+            break  
     
-         
-        
+        if choice == 1:
     
-  
-    
-    while True:
+            while True:
                 try:
-                    input_product_id = int(input("Enter a productid for updating stock: "))
+                    product_id = int(input("Which id? "))
                 except ValueError:
-                    print("You need to enter a number")
-                    continue             
-
-                product = get_product(input_product_id)
-
-                if product is None:
-                    print("id does not exist")
+                    print("Integer is expected")
                     continue
-
                 
-                while True:
-                        try:
-                            input_stock = int(input("Enter a new Stock: "))
-                        except ValueError:
-                                print("Enter a number")
-                                continue
-                        break
+                product = get_product_by_id(product_id, products)
                 
-                
+                if product is None:
+                    print("Id does not exist")
+                else:
+                    print(f"Name: {product["name"]}")
+                    print(f"Preis: {product["price"]}")
+                    break
 
-                update_product = update_stock(input_product_id, input_stock)
-                print(update_product)
-               
-                    
-                break
-    
-    """
-    load_stock_list = get_low_stocks()
-    print(load_stock_list)
-    
+            
 
-    
-    
-
-products = [
-    {"id": 1, "name": "Tisch", "price": 299, "stock": 4},
-    {"id": 2, "name": "Stuhl", "price": 99, "stock": 2},
-    {"id": 3, "name": "Schrank", "price": 599, "stock": 2}
-]
-
-
-
-def get_product(product_id: int) -> list[dict[str, int | str]]:
-    saved_products = load_products()
-    for product in saved_products:
-        if product["id"] == product_id:
-            return product
-
-    return None 
-
-
-def list_products(products: list[dict[str, int | str]]) -> list[str]:
-    saved_list = load_products()
-    result = []
-
-    for product in saved_list:
-        result.append(product["name"])
-
-    return result
         
+        if choice == 2:
+             
+            product_list = list_products(products)
+            print(f"those products exist: {product_list}")
+
+            print("Do you want to select a product?")
+
+            user_input = input("")
+
+            if user_input.lower() == "yes":
+
+                product_name = (input("Choose youre product: "))
+                product = search_product(product_name, products)
+                if product is None:
+                    print("Product does not exist")
+                else:
+                     print(product)
+            else:
+                 print("Programm closed")
+
+        if choice == 3:
+                name = input("Enter product: ")
+                found_product = search_product(name, products)
+               
+                if found_product is None:
+                    print("Product does not exist")
+
+                else:
+                    print(f"Product found: {found_product["name"]}, {found_product["price"]}")
+
+                
+
+        if choice == 4:
+             
     
-def search_product(product_name):
-    saved_list = load_products()
-    for product in saved_list:
-        if product["name"].lower() == product_name.lower():
-            return product
-    return None
+            while True:
+                try:
+                    product_id = int(input("New id: "))
+                except ValueError:
+                    print("Integer is expected")
+                    continue
+                
+            
+
+                id_exist = get_product_by_id(product_id, products)
+              
+                if id_exist is not None:
+                    print("id already exists")
+                    continue
+                break 
 
 
-def add_product(id: int, name: str, price: int, stock: int):
+            name = input("enter a name: ")
+            while True:
+                try:
+                    price = int(input("A price: "))
+                    break
+                except ValueError:
+                    print("Integer is expected")
+                    continue
+                
+            while True:
+                    try:
+                        stock = int(input("Youre Stock: "))
+                        break 
+                    except ValueError:
+                        print("Integer is expected: ")
+                        continue
+             
+            
+            new_product = add_product(product_id, name, price, stock, products)
+            save_products(products)
+            print(f"Neues Produkt: {new_product}")
+        
 
-    new_product = {
-        "id": id,
-        "name": name,
-        "price": price,
-        "stock": stock
-    }
+    
+    
+        if choice == 5:
+    
+        
+                while True:
+                            try:
+                                input_product_id = int(input("Enter a productid for updating stock: "))
+                            except ValueError:
+                                print("You need to enter a number")
+                                continue             
 
-    products.append(new_product)
+                            product = get_product_by_id(input_product_id, products)
+                            
+                            if product is None:
+                                print("id does not exist")
+                                continue
 
-    return new_product
+                            
+                            while True:
+                                    try:
+                                        input_stock = int(input("Enter a new Stock: "))
+                                    except ValueError:
+                                            print("Enter a number")
+                                            continue
+                                    break
+                            
+                            
 
-def update_stock(product_id: id, update_stock: id):
-    for product in products:
-        if product["id"] == product_id:
-            product["stock"] = update_stock
-            return product  
-    return None
-
-
-def get_low_stocks():
-    load_list = load_products()
-    low_stock_products = []
-    for product in load_list:
-        if product["stock"]<= 2:
-            low_stock_products.append(product)
-    return low_stock_products
-
-
-
-def save_products(products):
-    with open("data/products.json", "w", encoding="utf-8") as f:
-        json.dump(products, f, indent=4)
-        return products
+                            update_product = update_stock(input_product_id, input_stock, products)
+                        
+                            save_products(products)
+                            print(update_product)
+                        
+                                
+                            break
+                
+                
 
 
+        if choice == 6:
 
-def load_products():
-    with open('data/products.json', 'r', encoding="utf-8") as f:
-        json_products = json.load(f)
-        return json_products
+            low_stock_list = get_low_stocks(products)
+            if not low_stock_list:
+                 print("No product with 2 or lower")
+            else:
+                print(low_stock_list)
+        
+
+        if choice == 7:
+            delete_id = int(input("enter id from product: "))
+            result = delete_product(delete_id, products)
+            if result is None:
+                print("id does not exist")
+
+
+                save_products(products)
+            
+            print(result)
+            print(products)
+
+ 
+    
+
 
 
   
           
 
+
     
      
+if __name__ == "__main__":
+    main()
