@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Tisch",
+        "price": 299,
+        "stock": 4
+    },
+    {
+        "id": 3,
+        "name": "Schrank",
+        "price": 599,
+        "stock": 2
+    }
+]
