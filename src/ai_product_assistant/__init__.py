@@ -7,7 +7,7 @@ def main() -> None:
 
 
     products = load_products()
-
+  
 
 
     while True:
@@ -46,8 +46,8 @@ def main() -> None:
                 if product is None:
                     print("Id does not exist")
                 else:
-                    print(f"Name: {product["name"]}")
-                    print(f"Preis: {product["price"]}")
+                    print(f"Name: {product.name}")
+                    print(f"Preis: {product.price}")
                     break
 
             
