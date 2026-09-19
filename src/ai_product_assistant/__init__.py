@@ -81,7 +81,7 @@ def main() -> None:
                     print("Product does not exist")
 
                 else:
-                    print(f"Product found: {found_product["name"]}, {found_product["price"]}")
+                    print(f"Product found: {found_product.name}, {found_product.price}")
 
                 
 

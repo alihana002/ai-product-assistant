@@ -2,13 +2,13 @@
     {
         "id": 1,
         "name": "Tisch",
-        "price": 299,
-        "stock": 4
+        "stock": 4,
+        "price": 299
     },
     {
         "id": 3,
         "name": "Schrank",
-        "price": 599,
-        "stock": 2
+        "stock": 2,
+        "price": 599
     }
 ]
