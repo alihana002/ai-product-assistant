@@ -6,7 +6,7 @@ from .models import *
 def get_product_by_id(product_id: int, products: list[Product]) -> Product | None:
     
     for product in products:
-        if product["id"] == product_id:
+        if product.id == product_id:
             return product
 
     return None 
@@ -15,7 +15,7 @@ def get_product_by_id(product_id: int, products: list[Product]) -> Product | Non
 def list_products(products: list[Product]) -> list[str]:
     result = []
     for product in products:
-        result.append(product["name"])
+        result.append(product.name)
 
     return result
         
@@ -23,19 +23,19 @@ def list_products(products: list[Product]) -> list[str]:
 def search_product(product_name: str, products: list[Product]) -> Product | None:
     
     for product in products:
-        if product["name"].lower() == product_name.lower():
+        if product.name.lower() == product_name.lower():
             return product
     return None
 
 
-def add_product(product_id: int, name: str, price: int, stock: int, products) -> Product | None:
+def add_product(product_id: int, name: str, price: int, stock: int, products: list[Product]) -> Product | None:
 
-    new_product: Product = {
-        "id": product_id,
-        "name": name,
-        "price": price,
-        "stock": stock
-    }
+    new_product: Product = Product (
+        id = product_id,
+        name= name,
+        price = price,
+        stock = stock
+    )
 
     existing_product = get_product_by_id(product_id, products)
 
@@ -49,8 +49,8 @@ def add_product(product_id: int, name: str, price: int, stock: int, products) ->
 
 def update_stock(product_id: int, update_stock: int, products: list[Product]) -> Product | None:
     for product in products:
-        if product["id"] == product_id:
-            product["stock"] = update_stock
+        if product.id == product_id:
+            product.stock = update_stock
             return product  
     return None
 
@@ -58,7 +58,7 @@ def update_stock(product_id: int, update_stock: int, products: list[Product]) ->
 def get_low_stocks(products: list[Product]) -> list[Product] | None:
     low_stock_products = []
     for product in products:
-        if product["stock"]<= 2:
+        if product.stock <= 2:
             low_stock_products.append(product)
     return low_stock_products
 
@@ -67,7 +67,7 @@ def get_low_stocks(products: list[Product]) -> list[Product] | None:
 
 def delete_product(product_id: int, products: list[Product]) -> str | None :
     for product in products:
-          if product["id"] == product_id:
+          if product.id == product_id:
                 products.remove(product)
                 return f"product deleted"
     return None
