@@ -1,65 +1,51 @@
 from ai_product_assistant.services import delete_product
-
+from ai_product_assistant.models import Product
 
 
 def test_delete_existing_product():
-    product_list = [
-        {
-            "id": 1,
-            "name": "Tisch",
-            "stock": 2,
-            "price": 200
-        },
 
-        {
-                    "id": 2,
-                    "name": "Couch",
-                    "stock": 2,
-                    "price": 300
-                }
-    ]
 
+    tisch = Product(1, "Tisch", 2, 200)
+    couch = Product(2, "Couch", 3, 150)
+
+    product_list = [tisch, couch]
 
     result = delete_product(1, product_list)
+    print(result)
+    
 
     assert result == "product deleted"
     """
     geht damit, das ist list comprehension (ids var), krürzer. 
     wie geht mit normaler funktiom?
     """
-    ids = [product["id"] for product in product_list]
+    
 
-    assert 1 not in ids;
-    assert 2 in ids;
-
-
+    assert tisch not in product_list ;
+    assert couch in product_list;
 
 
-    def test_delete_not_existing_product():
-        product_list = [
-            {
-                "id": 1,
-                "name": "Tisch",
-                "stock": 2,
-                "price": 200
-            },
 
-            {
-                        "id": 2,
-                        "name": "Couch",
-                        "stock": 2,
-                        "price": 300
-                    }
-        ]
 
-        ids_before = [product["id"] for product in product_list]
+
+
+
+        
+def test_delete_not_existing_product():
+       
+        
+        tisch = Product(1, "Tisch", 2, 200)
+        couch = Product(2, "Couch", 3, 150)
+
+        product_list = [tisch, couch]
         result = delete_product(99, product_list)
-        ids_now  = [product["id"] for product in product_list]
+        print(result)
+      
     
 
         assert result is None 
 
-        assert ids_before == ids_now
+    
 
         
 
