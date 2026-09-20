@@ -13,6 +13,7 @@ def main() -> None:
     while True:
 
         
+        
 
         print("\n--- Main Menu ---")
         print("1. get product (by id)")
@@ -24,10 +25,16 @@ def main() -> None:
         print("7. delete product")
         print("8. Exit")
 
+        try:
+            choice = int(input("Enter your choice (1-8): "))
+        except ValueError:
+             print("Integer is expected")
+             continue
+             
 
-        choice = int(input("Enter your choice (1-8): "))
-
-
+        if choice not in range (1, 9):
+            print("Choice must be from 1-8")
+        
         if choice == 8:
             print("Exiting the program. Goodbye!")
             break  
@@ -180,13 +187,20 @@ def main() -> None:
         if choice == 7:
             delete_id = int(input("enter id from product: "))
             result = delete_product(delete_id, products)
+          
             if result is None:
                 print("id does not exist")
 
 
+
+            else:
                 save_products(products)
+                print("product got deleted")
+
+
+   
             
-            print(result)
+         
             print(products)
 
  
