@@ -7,7 +7,8 @@ def main() -> None:
 
 
     products = load_products()
-  
+    if products is None:
+         return 
 
 
     while True:
