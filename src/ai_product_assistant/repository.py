@@ -29,8 +29,12 @@ def load_products()->list[Product] | None:
         return None 
     new_list = []
     for product_dic in products:
-        obj_product =  Product(**product_dic)
-        new_list.append(obj_product)
+        try:
+            obj_product =  Product(**product_dic)
+        except TypeError:
+            print("Missing value")
+            
+    new_list.append(obj_product)
         
     return new_list
 
