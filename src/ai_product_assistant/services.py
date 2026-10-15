@@ -15,7 +15,7 @@ def get_product_by_id(product_id: int, products: list[Product]) -> Product | Non
 def list_products(products: list[Product]) -> list[str]:
     result = []
     for product in products:
-        result.append(product.name)
+        result.append(product)
 
     return result
         
