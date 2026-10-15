@@ -251,10 +251,10 @@ uv add --dev pytest
 ```
 
 - [x] Erste Testdatei erstellen
-- [] `get_product()` testen
+- [x] `get_product()` testen
 - [x] Existierende ID testen
 - [x] Nicht existierende ID testen
-- [] Ungültige Eingabe testen
+- [x] Ungültige Eingabe testen
 
 Spätere Struktur:
 
@@ -272,20 +272,54 @@ tests/
 
 Bevor ein LLM eingebaut wird:
 
-- [ ] HTTP-Grundlagen verstehen
-- [ ] Request und Response verstehen
-- [ ] GET vs. POST verstehen
-- [ ] JSON über APIs senden und empfangen
-- [ ] Status Codes verstehen
-- [ ] API Keys verstehen
+- [x] HTTP-Grundlagen verstehen
+- [x] Request und Response verstehen
+- [x] GET vs. POST verstehen
+- [x] JSON über APIs senden und empfangen
+- [x] Status Codes verstehen
+- [x] API Keys verstehen
 - [ ] Environment Variables verstehen
 
 ## Kleine Übung
 
-- [ ] Eine öffentliche Test-API aus Python aufrufen
-- [ ] Response prüfen
-- [ ] JSON auslesen
-- [ ] Fehlerfälle behandeln
+- [x] Eine öffentliche Test-API aus Python aufrufen
+- [x] Response prüfen
+- [x] JSON auslesen
+- [x] Fehlerfälle behandeln
+
+### HTTP-Übungsfortschritt
+
+- [x] Eine erfolgreiche `200`-Response untersuchen
+- [x] Einen `404 Not Found`-Fall mit einer vollständigen API-URL auslösen
+- [x] Fehlerdaten aus dem JSON-Body auslesen
+- [x] `raise_for_status()` und `HTTPError` verstehen
+- [x] Einen allgemeinen `RequestException`-Block ergänzen
+
+## Nächstes Projektziel: externe Produkt-API lesen
+
+Ziel: Produktdaten lesend von einer passenden öffentlichen API abrufen,
+ohne die lokale JSON-Produktverwaltung zu ersetzen.
+
+- [x] Öffentliche Produkt-API auswählen
+- [x] Einen GET-Endpoint dokumentieren
+- [x] Externe JSON-Daten untersuchen
+- [x] Externe Felder mit `Product` vergleichen
+- [x] Entscheiden, in welche Schicht der API-Zugriff gehört
+- [x] HTTP- und Verbindungsfehler behandeln
+
+### Umsetzung in kleinen Schritten
+
+- [x] Ein API-Produkt-Dictionary im Notebook manuell in ein `Product`-Objekt umwandeln
+- [x] Eine Notebook-Funktion mit `product_id: int` erstellen, die bei Erfolg ein `Product` zurückgibt
+- [x] Bei `404 Not Found` gezielt `None` zurückgeben
+- [x] Andere HTTP-Fehler von `404` unterscheiden
+- [x] Einen simulierten `500 Server Error` testen und sicherstellen, dass er nicht als `None` behandelt wird
+- [x] Verbindungsfehler verständlich behandeln, ohne sie als "Produkt nicht gefunden" auszugeben
+- [x] Erfolgsfall mit einer vorhandenen API-ID testen
+- [x] Nicht vorhandene API-ID testen und `None` prüfen
+- [x] Erst danach die getestete Funktion nach `repository.py` übertragen
+- [ ] Repository-Funktion anschließend separat mit pytest testen
+- [ ] Erst nach dem Repository-Test entscheiden, ob ein CLI-Menüpunkt sinnvoll ist
 
 ---
 
