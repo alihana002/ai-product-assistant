@@ -2,6 +2,7 @@ import json
 
 from .models import *
 from dataclasses import asdict
+import requests
 
 
 def save_products(products:list[Product]) -> None:
@@ -34,10 +35,36 @@ def load_products()->list[Product] | None:
         except TypeError:
             print("Missing value")
             
-    new_list.append(obj_product)
+        new_list.append(obj_product)
         
     return new_list
 
 
 
+def get_api_product(product_id: int) -> Product | None:
+    try:
+        r_p = requests.get(f'https://dummyjson.com/products/{product_id}')
+        r_p.raise_for_status()
+        r_p_json = r_p.json()
+    except requests.HTTPError:
+        
+        if r_p.status_code == 404 :
+            return None 
+        raise
+        
+  
+
+            
+    new_product : Product = Product (
+        id =  r_p_json["id"],
+        name = r_p_json["title"],
+        price = r_p_json["price"], 
+        stock = r_p_json["stock"]
+
+    )
+
+    
+    return new_product
+     
+ 
 
